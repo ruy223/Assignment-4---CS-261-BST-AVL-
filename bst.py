@@ -205,90 +205,30 @@ class BST:
                 current_node = current_node.right
 
             else:
-                # Node was found
-
-                # No children
+                # Node found
                 if current_node.left is None and current_node.right is None:
-
-                    # removing root node
-                    if parent_node is None:
-                        self._root = None
-
-                    # remove left leaf
-                    elif parent_node.left == current_node:
-                        parent_node.left = None
-
-                    # remove right leaf
-                    else:
-                        parent_node.right = None
-
-                    return True
-
-                # Only left child
-                elif current_node.right is None:
-
-                    # removing root
-                    if parent_node is None:
-                        self._root = current_node.left
-
-                    # node is left child
-                    elif parent_node.left == current_node:
-                        parent_node.left = current_node.left
-
-                    # node is right child
-                    else:
-                        parent_node.right = current_node.left
-
-                    return True
-
-                # Only right child
-                elif current_node.left is None:
-                    # removing root
-                    if parent_node is None:
-                        self._root = current_node.right
-
-                    # node is left child
-                    elif parent_node.left == current_node:
-                        parent_node.left = current_node.right
-
-                    # node is right child
-                    else:
-                        parent_node.right = current_node.right
-
-                    return True
-
-                # Two children
+                    self._remove_no_subtrees(parent_node, current_node)
+                elif current_node.left is None or current_node.right is None:
+                    self._remove_one_subtree(parent_node, current_node)
                 else:
+                    self._remove_two_subtrees(parent_node, current_node)
+                return True
 
-                    # Find inorder successor
-                    successor_parent = current_node
-                    successor = current_node.right
-
-                    while successor.left is not None:
-                        successor_parent = successor
-                        successor = successor.left
-
-                    # Copy successor value
-                    current_node.value = successor.value
-
-                    # Remove successor node
-                    if successor_parent.left == successor:
-                        successor_parent.left = successor.right
-                    else:
-                        successor_parent.right = successor.right
-
-                    return True
-
-        # value not found
+        # Value wasn't found
         return False
 
 
     def _remove_no_subtrees(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
-        TODO: Write your implementation
+         Removes a node that has no children
         """
         # remove node that has no subtrees (no left or right nodes)
-        pass
+        if remove_parent is None:
+            self._root = None
+        elif remove_parent.left == remove_node:
+            remove_parent.left = None
+        else:
+            remove_parent.right = None
 
     def _remove_one_subtree(self, remove_parent: BSTNode, remove_node: BSTNode) -> None:
         """
