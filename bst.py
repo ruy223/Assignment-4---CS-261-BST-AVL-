@@ -174,7 +174,7 @@ class BST:
                 current_node = current_node.left
             else:
                 current_node = current_node.right
-
+d
         new_node = BSTNode(value)
 
         if parent_node is None:
