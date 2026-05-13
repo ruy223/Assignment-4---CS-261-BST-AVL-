@@ -288,7 +288,20 @@ class BST:
         Returns an inorder traversal of the tree as a Queue.
         If the tree is empty, returns and empty Queue.
         """
-        pass
+        current = self._root
+        queue = Queue()
+        stack = Stack()
+
+        # Loop through until empty
+        while current is not None or not stack.is_empty():
+            while current is not None:
+                stack.push(current)
+                current = current.left
+            popped_val = stack.pop()    # Pop all values before None to stack
+            current = popped_val.right  # Go right
+            queue.enqueue(popped_val.value) # Add popped values to queue
+        return queue
+
 
     def find_min(self) -> object:
         """
