@@ -292,13 +292,15 @@ class BST:
 
     def find_min(self) -> object:
         """
-        TODO: Write your implementation
+        Searches for a minimum value in the tree and returns it.
+        If the tree is empty, returns None.
         """
         pass
 
     def find_max(self) -> object:
         """
-        TODO: Write your implementation
+        Searches for a maximum value in the tree and returns it.
+        If the tree is empty, returns None.
         """
         pass
 
