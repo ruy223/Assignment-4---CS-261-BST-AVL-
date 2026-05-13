@@ -325,15 +325,19 @@ class BST:
 
     def is_empty(self) -> bool:
         """
-        TODO: Write your implementation
+        Checks if the tree is empty.
+        Returns True if the tree is empty, False otherwise.
         """
-        pass
+        if self._root is None:
+            return True
+        else:
+            return False
 
     def make_empty(self) -> None:
         """
-        TODO: Write your implementation
+        Removes all nodes from the tree.
         """
-        pass
+        self._root = None
 
 
 # ------------------- BASIC TESTING -----------------------------------------
