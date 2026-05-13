@@ -295,14 +295,33 @@ class BST:
         Searches for a minimum value in the tree and returns it.
         If the tree is empty, returns None.
         """
-        pass
+        # Check if tree is empty
+        if self._root is None:
+            return None
+
+        current = self._root
+        min_element = None
+        while current is not None: # Go left until end of tree to find min,
+            min_element = current
+            current = current.left
+        return min_element.value
+
 
     def find_max(self) -> object:
         """
         Searches for a maximum value in the tree and returns it.
         If the tree is empty, returns None.
         """
-        pass
+        # Check if tree is empty
+        if self._root is None:
+            return None
+
+        current = self._root
+        max_element = None
+        while current is not None: # Go right until end of tree to find max
+            max_element = current
+            current = current.right
+        return max_element.value
 
     def is_empty(self) -> bool:
         """
