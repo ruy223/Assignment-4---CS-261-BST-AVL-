@@ -297,7 +297,7 @@ class BST:
             while current is not None:
                 stack.push(current)
                 current = current.left
-            popped_val = stack.pop()    # Pop all values before None to stack
+            popped_val = stack.pop()    # Pop the next node
             current = popped_val.right  # Go right
             queue.enqueue(popped_val.value) # Add popped values to queue
         return queue
