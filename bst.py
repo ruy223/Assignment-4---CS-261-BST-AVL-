@@ -273,6 +273,7 @@ class BST:
         Returns True if the value was found, False otherwise.
         """
         temp = self._root
+        # Iterates through the tree, if None is reached, leave loop and return false
         while temp is not None:
             if value < temp.value:
                 temp = temp.left
@@ -284,7 +285,8 @@ class BST:
 
     def inorder_traversal(self) -> Queue:
         """
-        TODO: Write your implementation
+        Returns an inorder traversal of the tree as a Queue.
+        If the tree is empty, returns and empty Queue.
         """
         pass
 
