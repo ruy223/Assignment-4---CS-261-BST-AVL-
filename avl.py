@@ -183,6 +183,7 @@ class AVL(BST):
         Returns rotated tree.
         """
         parent = node.parent
+        new_root = None
         balance_factor = self._balance_factor(node)
 
         # Single rotations
@@ -199,15 +200,16 @@ class AVL(BST):
             new_root = self._rotate_left(node)
 
         # Update height and parent node
-        new_root.parent = parent
+        if new_root is None:
+            new_root.parent = parent
         # If node is root, update pointer
-        if parent is None:
-            self._root = new_root
-        else:
-            if parent.left == node:
-                parent.left = new_root
-            elif parent.right == node:
-                parent.right = new_root
+            if parent is None:
+                self._root = new_root
+            else:
+                if parent.left == node:
+                    parent.left = new_root
+                elif parent.right == node:
+                    parent.right = new_root
 
         self._update_height(node)
 
