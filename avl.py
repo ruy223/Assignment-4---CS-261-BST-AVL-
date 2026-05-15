@@ -200,7 +200,7 @@ class AVL(BST):
             new_root = self._rotate_left(node)
 
         # Update height and parent node
-        if new_root is None:
+        if new_root is not None:
             new_root.parent = parent
         # If node is root, update pointer
             if parent is None:
