@@ -141,14 +141,61 @@ class AVL(BST):
         Returns True if the value was removed, False otherwise.
         O(log N) runtime.
         """
-        pass
+        current_node = self._root
+        parent_node = None
+
+        # Find the node for removal
+        while current_node is not None:
+            if value < current_node.value:
+                parent_node = current_node
+                current_node = current_node.left
+            elif value > current_node.value:
+                parent_node = current_node
+                current_node = current_node.right
+            else:
+                # Node found
+                if current_node.left is None and current_node.right is None:
+                    self._remove_no_subtrees(parent_node, current_node)
+                elif current_node.left is None or current_node.right is None:
+                    self._remove_one_subtree(parent_node, current_node)
+                else:
+                    self._remove_two_subtrees(parent_node, current_node)
+
+        # Walkback loop
+        temp = parent_node
+        while temp is not None:
+            self._update_height(temp)
+            self._rebalance(temp)
+            temp = temp.parent
+            return True
+
+        # Value wasn't found
+        return False
                            #
 
     def _remove_two_subtrees(self, remove_parent: AVLNode, remove_node: AVLNode) -> AVLNode:
         """
-        TODO: Write your implementation
+        Removes a node that has two children using the inorder successor.
         """
-        pass
+        # remove node that has two subtrees
+        # Find inorder successor (leftmost node in right subtree)
+        successor_parent = remove_node
+        successor = remove_node.right
+        while successor.left is not None:
+            successor_parent = successor
+            successor = successor.left
+
+        remove_node.value = successor.value
+
+        # Remove the successor node
+        if successor_parent.left == successor:
+            successor_parent.left = successor.right
+            if successor.right:
+                successor.right.parent = successor_parent
+        else:
+            successor_parent.right = successor.right
+            if successor.right:
+                successor.right.parent = successor_parent
 
     def _balance_factor(self, node: AVLNode) -> int:
         """
