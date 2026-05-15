@@ -121,9 +121,10 @@ class AVL(BST):
 
     def _balance_factor(self, node: AVLNode) -> int:
         """
-        TODO: Write your implementation
+        Returns the balance factor of the node.
         """
-        pass
+        balance_factor = self._get_height(node.left) - self._get_height(node.right)
+        return balance_factor
 
     def _get_height(self, node: AVLNode) -> int:
         """
@@ -178,9 +179,23 @@ class AVL(BST):
 
     def _rebalance(self, node: AVLNode) -> None:
         """
-        TODO: Write your implementation
+        Determines if the tree is balanced or not.
+        Returns rotated tree.
         """
-        pass
+        balance_factor = self._balance_factor(node)
+
+        # Single rotations
+        if balance_factor > 1 and self._balance_factor(node.left) >= 0:
+            self._rotate_right(node)
+        if balance_factor < -1 and self._balance_factor(node.right) >= 0:
+            self._rotate_left(node)
+        # Double rotations
+        if balance_factor > 1 and self._balance_factor(node.left) < 0:
+            node.left = self._rotate_left(node.left)
+            self._rotate_right(node)
+        if balance_factor < -1 and self._balance_factor(node.right) < 0:
+            node.right = self._rotate_right(node.right)
+            self._rotate_left(node)
 
 
 # ------------------- BASIC TESTING -----------------------------------------
