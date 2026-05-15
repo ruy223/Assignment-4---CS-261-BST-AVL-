@@ -127,21 +127,44 @@ class AVL(BST):
 
     def _get_height(self, node: AVLNode) -> int:
         """
-        TODO: Write your implementation
+        Returns height of the tree.
         """
         pass
 
     def _rotate_left(self, node: AVLNode) -> AVLNode:
         """
-        TODO: Write your implementation
+        Rotates the tree to the left.
         """
-        pass
+        rotating_node = node.right
+        node.right = node.left
+
+        if node.right is not None:
+            node.right.parent = node
+        rotating_node.left = node
+        node.parent = rotating_node
+
+        self._update_height(node)
+        self._update_height(rotating_node)
+
+        return rotating_node
 
     def _rotate_right(self, node: AVLNode) -> AVLNode:
         """
-        TODO: Write your implementation
+        Rotates the tree to the right.
         """
-        pass
+        rotating_node = node.left
+        node.left = node.right
+
+        if node.left is not None:
+            node.left.parent = node
+        rotating_node.right = node
+        node.parent = rotating_node
+
+        self._update_height(node)
+        self._update_height(rotating_node)
+
+        return rotating_node
+
 
     def _update_height(self, node: AVLNode) -> None:
         """
