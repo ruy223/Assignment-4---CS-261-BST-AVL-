@@ -144,7 +144,7 @@ class AVL(BST):
         current_node = self._root
         parent_node = None
 
-        # Find the node for removal
+        # Find the node
         while current_node is not None:
             if value < current_node.value:
                 parent_node = current_node
@@ -153,7 +153,7 @@ class AVL(BST):
                 parent_node = current_node
                 current_node = current_node.right
             else:
-                # Node found
+                # Found - remove
                 if current_node.left is None and current_node.right is None:
                     self._remove_no_subtrees(parent_node, current_node)
                 elif current_node.left is None or current_node.right is None:
@@ -161,17 +161,16 @@ class AVL(BST):
                 else:
                     self._remove_two_subtrees(parent_node, current_node)
 
-        # Walkback loop
-        temp = parent_node
-        while temp is not None:
-            self._update_height(temp)
-            self._rebalance(temp)
-            temp = temp.parent
-            return True
+                # Walk back up and rebalance
+                temp = parent_node
+                while temp is not None:
+                    self._update_height(temp)
+                    self._rebalance(temp)
+                    temp = temp.parent
+                return True
 
         # Value wasn't found
         return False
-                           #
 
     def _remove_two_subtrees(self, remove_parent: AVLNode, remove_node: AVLNode) -> AVLNode:
         """
@@ -187,7 +186,7 @@ class AVL(BST):
 
         remove_node.value = successor.value
 
-        # Remove the successor node
+        # Remove successor
         if successor_parent.left == successor:
             successor_parent.left = successor.right
             if successor.right:
