@@ -140,7 +140,7 @@ class AVL(BST):
         Rotates the tree to the left.
         """
         rotating_node = node.right
-        node.right = node.left
+        node.right = rotating_node.left
 
         if node.right is not None:
             node.right.parent = node
@@ -157,7 +157,7 @@ class AVL(BST):
         Rotates the tree to the right.
         """
         rotating_node = node.left
-        node.left = node.right
+        node.left = rotating_node.right
 
         if node.left is not None:
             node.left.parent = node
