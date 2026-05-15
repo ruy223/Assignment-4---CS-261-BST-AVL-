@@ -182,14 +182,13 @@ class AVL(BST):
         Determines if the tree is balanced or not.
         Returns rotated tree.
         """
+        parent = node.parent
         balance_factor = self._balance_factor(node)
 
         # Single rotations
         if balance_factor > 1 and self._balance_factor(node.left) >= 0:
-            self._rotate_right(node)
             new_root = self._rotate_right(node)
         if balance_factor < -1 and self._balance_factor(node.right) >= 0:
-            self._rotate_left(node)
             new_root = self._rotate_left(node)
         # Double rotations
         if balance_factor > 1 and self._balance_factor(node.left) < 0:
@@ -197,11 +196,19 @@ class AVL(BST):
             new_root = self._rotate_right(node)
         if balance_factor < -1 and self._balance_factor(node.right) < 0:
             node.right = self._rotate_right(node.right)
-            self._rotate_left(node)
             new_root = self._rotate_left(node)
 
         # Update height and parent node
-        parent = node.parent
+        new_root.parent = parent
+        # If node is root, update pointer
+        if parent is None:
+            self._root = new_root
+        else:
+            if parent.left == node:
+                parent.left = new_root
+            elif parent.right == node:
+                parent.right = new_root
+
         self._update_height(node)
 
 
