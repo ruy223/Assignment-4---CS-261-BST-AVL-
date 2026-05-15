@@ -137,7 +137,9 @@ class AVL(BST):
 
     def remove(self, value: object) -> bool:
         """
-        TODO: Write your implementation
+        Removes a value from the tree.
+        Returns True if the value was removed, False otherwise.
+        O(log N) runtime.
         """
         pass
                            #
