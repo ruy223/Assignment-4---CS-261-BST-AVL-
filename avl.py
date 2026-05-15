@@ -128,12 +128,11 @@ class AVL(BST):
             parent_node.right = new_node
 
         # Walkback loop
-        current_node = new_node
-        current_parent = current_node.parent
-        while current_parent is not None:
-            next.parent = current_parent.parent
-            self._rebalance(current_parent)
-            current_parent = current_parent.parent
+        current_node = new_node.parent
+        while current_node is not None:
+            self._update_height(current_node)
+            self._rebalance(current_node)
+            current_node = current_node.parent
 
 
     def remove(self, value: object) -> bool:
