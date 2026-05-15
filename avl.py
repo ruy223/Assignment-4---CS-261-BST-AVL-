@@ -131,6 +131,7 @@ class AVL(BST):
         current_node = new_node
         current_parent = current_node.parent
         while current_parent is not None:
+            next.parent = current_parent.parent
             self._rebalance(current_parent)
             current_parent = current_parent.parent
 
@@ -218,9 +219,9 @@ class AVL(BST):
         balance_factor = self._balance_factor(node)
 
         # Single rotations
-        if balance_factor > 1 and self._balance_factor(node.left) >= 0:
+        if balance_factor > 1 and node.left is not None and self._balance_factor(node.left) >= 0:
             new_root = self._rotate_right(node)
-        elif balance_factor < -1 and self._balance_factor(node.right) >= 0:
+        elif balance_factor < -1 and node.right is not None and self._balance_factor(node.right) >= 0:
             new_root = self._rotate_left(node)
         # Double rotations
         elif balance_factor > 1 and node.left is not None and self._balance_factor(node.left) < 0:
