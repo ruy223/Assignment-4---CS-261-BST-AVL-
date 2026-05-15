@@ -220,13 +220,13 @@ class AVL(BST):
         # Single rotations
         if balance_factor > 1 and self._balance_factor(node.left) >= 0:
             new_root = self._rotate_right(node)
-        if balance_factor < -1 and self._balance_factor(node.right) >= 0:
+        elif balance_factor < -1 and self._balance_factor(node.right) >= 0:
             new_root = self._rotate_left(node)
         # Double rotations
-        if balance_factor > 1 and self._balance_factor(node.left) < 0:
+        elif balance_factor > 1 and node.left is not None and self._balance_factor(node.left) < 0:
             node.left = self._rotate_left(node.left)
             new_root = self._rotate_right(node)
-        if balance_factor < -1 and self._balance_factor(node.right) < 0:
+        elif balance_factor < -1 and node.right is not None and self._balance_factor(node.right) < 0:
             node.right = self._rotate_right(node.right)
             new_root = self._rotate_left(node)
 
