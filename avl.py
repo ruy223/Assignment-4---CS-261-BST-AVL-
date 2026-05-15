@@ -100,7 +100,9 @@ class AVL(BST):
 
     def add(self, value: object) -> None:
         """
-        TODO: Write your implementation
+        Adds a new value to the tree. Maintains AVL property.
+        Duplicate values not allowed.
+        O(log N) runtime.
         """
         pass
 
@@ -109,26 +111,13 @@ class AVL(BST):
         TODO: Write your implementation
         """
         pass
-
-    # Experiment and see if you can use the optional                         #
-    # subtree removal methods defined in the BST here in the AVL.            #
-    # Call normally using self -> self._remove_no_subtrees(parent, node)     #
-    # You need to override the _remove_two_subtrees() method in any case.    #
-    # Remove these comments.                                                 #
-    # Remove these method stubs if you decide not to use them.               #
-    # Change this method in any way you'd like.                              #
+                           #
 
     def _remove_two_subtrees(self, remove_parent: AVLNode, remove_node: AVLNode) -> AVLNode:
         """
         TODO: Write your implementation
         """
         pass
-
-    # It's highly recommended to implement                          #
-    # the following methods for balancing the AVL Tree.             #
-    # Remove these comments.                                        #
-    # Remove these method stubs if you decide not to use them.      #
-    # Change these methods in any way you'd like.                   #
 
     def _balance_factor(self, node: AVLNode) -> int:
         """
