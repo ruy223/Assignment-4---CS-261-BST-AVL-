@@ -104,7 +104,36 @@ class AVL(BST):
         Duplicate values not allowed.
         O(log N) runtime.
         """
-        pass
+        parent_node = None
+        current_node = self._root
+
+        while current_node is not None:
+            parent_node = current_node
+            # Check for duplicate, they aren't allowed
+            if value == current_node.value:
+                return
+            elif value < current_node.value:
+                current_node = current_node.left
+            else:
+                current_node = current_node.right
+
+        new_node = AVLNode(value)
+        new_node.parent = parent_node
+
+        if parent_node is None:
+            self._root = new_node
+        elif value < parent_node.value:
+            parent_node.left = new_node
+        else:
+            parent_node.right = new_node
+
+        # Walkback loop
+        current_node = new_node
+        current_parent = current_node.parent
+        while current_parent is not None:
+            self._rebalance(current_parent)
+            current_parent = current_parent.parent
+
 
     def remove(self, value: object) -> bool:
         """
