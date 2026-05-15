@@ -129,7 +129,11 @@ class AVL(BST):
         """
         Returns height of the tree.
         """
-        pass
+        # Return -1 for all None
+        if node is None:
+            return -1
+        else: #Othereise return height
+            return node.height
 
     def _rotate_left(self, node: AVLNode) -> AVLNode:
         """
@@ -168,9 +172,9 @@ class AVL(BST):
 
     def _update_height(self, node: AVLNode) -> None:
         """
-        TODO: Write your implementation
+        Updates the height of the tree after rotation.
         """
-        pass
+        node.height = max(self._get_height(node.left), self._get_height(node.right)) + 1
 
     def _rebalance(self, node: AVLNode) -> None:
         """
