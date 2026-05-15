@@ -187,15 +187,22 @@ class AVL(BST):
         # Single rotations
         if balance_factor > 1 and self._balance_factor(node.left) >= 0:
             self._rotate_right(node)
+            new_root = self._rotate_right(node)
         if balance_factor < -1 and self._balance_factor(node.right) >= 0:
             self._rotate_left(node)
+            new_root = self._rotate_left(node)
         # Double rotations
         if balance_factor > 1 and self._balance_factor(node.left) < 0:
             node.left = self._rotate_left(node.left)
-            self._rotate_right(node)
+            new_root = self._rotate_right(node)
         if balance_factor < -1 and self._balance_factor(node.right) < 0:
             node.right = self._rotate_right(node.right)
             self._rotate_left(node)
+            new_root = self._rotate_left(node)
+
+        # Update height and parent node
+        parent = node.parent
+        self._update_height(node)
 
 
 # ------------------- BASIC TESTING -----------------------------------------
