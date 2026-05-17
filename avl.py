@@ -156,13 +156,14 @@ class AVL(BST):
                 # Found - remove
                 if current_node.left is None and current_node.right is None:
                     self._remove_no_subtrees(parent_node, current_node)
+                    temp = parent_node
                 elif current_node.left is None or current_node.right is None:
                     self._remove_one_subtree(parent_node, current_node)
+                    temp = parent_node
                 else:
-                    self._remove_two_subtrees(parent_node, current_node)
+                    temp = self._remove_two_subtrees(parent_node, current_node)
 
                 # Walk back up and rebalance
-                temp = parent_node
                 while temp is not None:
                     self._update_height(temp)
                     self._rebalance(temp)
@@ -195,6 +196,7 @@ class AVL(BST):
             successor_parent.right = successor.right
             if successor.right:
                 successor.right.parent = successor_parent
+        return successor_parent
 
     def _balance_factor(self, node: AVLNode) -> int:
         """
