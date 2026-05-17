@@ -160,7 +160,7 @@ class AVL(BST):
                     self._remove_one_subtree(parent_node, current_node)
                 else:
                     self._remove_two_subtrees(parent_node, current_node)
-#
+
                 # Walk back up and rebalance
                 temp = parent_node
                 while temp is not None:
